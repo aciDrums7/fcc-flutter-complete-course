@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 
+String getFullName(String firstName, String lastName) {
+  return '$firstName $lastName';
+}
+
+String getFullNameArrowFn(String firstName, String lastName) =>
+    '$firstName $lastName';
+
 void main() {
   runApp(const MyApp());
 }
