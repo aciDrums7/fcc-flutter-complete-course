@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 
-void test() {
-  var person = {
-    'name': 'John',
-    'age': 30,
-  };
-  print(person);
-  person['name'] = 'Doe';
-  print(person);
+void test(List<String?>? names) {
+  final lenght = names?.length;
+  print(lenght);
 }
 
 void main() {
@@ -20,7 +15,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    test();
+    test([null, null, 'Belushi']);
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
