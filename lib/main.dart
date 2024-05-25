@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
 
-void test(List<String?>? names) {
-  final lenght = names?.length;
-  print(lenght);
+enum AnimalType { cat, dog, bunny }
+
+class Cat {
+  final String name;
+  Cat(this.name);
+  factory Cat.fluffBall() => Cat(AnimalType.cat.name);
+
+  @override
+  bool operator ==(covariant Cat other) => other.name == name;
+
+  @override
+  int get hashCode => name.hashCode;
+}
+
+void test() {
+  final cat1 = Cat('Foo');
+  final cat2 = Cat('Foo');
+  print(cat1 == cat2 ? 'cats are equal' : 'cats are not equal');
 }
 
 void main() {
@@ -15,7 +30,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    test([null, null, 'Belushi']);
+    test();
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
