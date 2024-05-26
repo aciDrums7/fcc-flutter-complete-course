@@ -1,77 +1,5 @@
 import 'package:flutter/material.dart';
 
-enum AnimalType { cat, dog, bunny }
-
-class Cat {
-  final String name;
-  Cat(this.name);
-  factory Cat.fluffBall() => Cat(AnimalType.cat.name);
-
-  @override
-  bool operator ==(covariant Cat other) => other.name == name;
-
-  @override
-  int get hashCode => name.hashCode;
-}
-
-extension Run on Cat {
-  void run() {
-    print('Cat $name is running');
-  }
-}
-
-Future<int> heavyFutureThatMulByThree(int a) {
-  return Future.delayed(const Duration(seconds: 3), () => a * 3);
-}
-
-//? A stream in Dart is like an Observable in Rxjs
-Stream<String> getName() {
-  return Stream.periodic(const Duration(seconds: 7), (i) => 'Fluffy $i');
-}
-
-//? An iterable is a lazy data structure, the values are 'computed' when they're called
-Iterable<int> getNumbers() sync* /* this makes this function a generaton */ {
-  for (var number in [1, 2, 3, 4, 5, 6, 7]) {
-    yield number;
-  }
-}
-
-Stream<int>
-    getNumbersAsync() async* /* this makes this function a generaton */ {
-  for (var number in [1, 2, 3, 4, 5, 6, 7]) {
-    yield number;
-  }
-}
-
-class Pair<A, B> {
-  final A value1;
-  final B value2;
-
-  Pair(this.value1, this.value2);
-}
-
-void test() async {
-  /* print(await heavyFutureThatMulByThree(7));
-  await for (final value in getName()) {
-    print(value);
-  }
-  print('Stream finished working'); */
-
-  /* for (final value in getNumbers()) {
-    print(value);
-    if(value == 3) break;
-  } */
-
-  /* await for (final value in getNumbersAsync()) {
-    print(value);
-    if (value == 3) break;
-  } */
-
-  final pair = Pair(1, 'one');
-  print(pair.value1);
-  print(pair.value2);
-}
-
 void main() {
   runApp(const MyApp());
 }
@@ -82,7 +10,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    test();
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(

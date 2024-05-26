@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "887733919260",
+    "project_id": "fcc-flutter-complete-course",
+    "storage_bucket": "fcc-flutter-complete-course.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:887733919260:android:f5cc494f440efe229849d9",
+        "android_client_info": {
+          "package_name": "com.example.fcc_flutter_complete_course"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApqmjQTlukdPg77Ff17ZJGMKMDGJC9TmU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
