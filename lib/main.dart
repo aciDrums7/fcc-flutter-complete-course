@@ -1,11 +1,10 @@
-import 'package:firebase_core/firebase_core.dart';
+import 'package:fcc_flutter_complete_course/views/login_view.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'firebase_options.dart';
 
 void main() {
   // ? https://docs.flutter.dev/resources/architectural-overview
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding
+      .ensureInitialized(); //? needed to resolve all Futures before rendering the widgets
   runApp(MaterialApp(
     title: 'Flutter Demo',
     theme: ThemeData(
@@ -16,88 +15,7 @@ void main() {
       ),
       useMaterial3: true,
     ),
-    home: const HomePage(),
+    // TODO: create 1 auth widget extended by login and register widgets to have DRY code
+    home: const LoginView(),
   ));
-}
-
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  //? late means 'I promise I will provide the value for this var'
-  late final TextEditingController _email;
-  late final TextEditingController _password;
-
-  @override
-  void initState() {
-    _email = TextEditingController();
-    _password = TextEditingController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _email.dispose();
-    _password.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Register')),
-      body: FutureBuilder(
-          // ? https://docs.flutter.dev/resources/architectural-overview
-          future: Future.delayed(const Duration(seconds: 3)).then((_) =>
-              Firebase.initializeApp(
-            options: DefaultFirebaseOptions.currentPlatform,
-          )),
-          builder: (context, snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.done:
-                return Column(
-                  children: [
-                    TextField(
-                      controller: _email,
-                      enableSuggestions: false,
-                      autocorrect: false,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration:
-                          const InputDecoration(hintText: 'Enter your email'),
-                    ),
-                    TextField(
-                      controller: _password,
-                      obscureText: true,
-                      enableSuggestions: false,
-                      autocorrect: false,
-                      decoration: const InputDecoration(
-                          hintText: 'Enter your password'),
-                    ),
-                    TextButton(
-                      onPressed: () async {
-                        final email = _email.text;
-                        final password = _password.text;
-                        try {
-                          final userCredentials = await FirebaseAuth.instance
-                              .createUserWithEmailAndPassword(
-                                  email: email, password: password);
-                          print(userCredentials);
-                        } catch (e) {
-                          print('Error: $e');
-                        }
-                      },
-                      child: const Text('Register'),
-                    ),
-                  ],
-                );
-              default:
-                return const Center(child: CircularProgressIndicator());
-            }
-          }),
-    );
-  }
 }
